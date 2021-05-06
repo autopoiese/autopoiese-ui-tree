@@ -6,39 +6,23 @@ import { StyledContainer, StyledWrapper } from './styled'
 
 type Container = typeof StyledContainer
 
-export const Tree = React.forwardRef<Container, { children: React.ReactNode }>(
+export type TreeProps = { children: React.ReactNode } & Pick<
+  Parameters<typeof StyledWrapper>[0],
+  'style'
+>
+
+export const Tree = React.forwardRef<Container, TreeProps>(
   ({ children, ...props }, ref) => {
-    //const [{ x, y }, setOffset] = useSpring(() => ({ x: 0, y: 0 }));
     const immediate = React.useRef(false)
     const container = React.useRef<Container>()
-    const [measureRef, bounds, forceRefresh] = useMeasure({ scroll: true })
+    const [measureRef, bounds] = useMeasure({ scroll: true })
     const [shift, setShift] = React.useState<null | string | boolean>(null)
-    /* React.useEffect(() => {
-    console.log(
-      scroll,
-      ref.current.scrollLeft,
-      ref.current.scrollTop,
-      immediate?.current
-    );
-    if (immediate?.current && ref.current) {
-      ref.current.scrollLeft = scroll.left;
-      ref.current.scrollTop = scroll.top;
-    }
-  }, [scroll]);
-  */
     return (
       <StyledContainer
-        {...{
-          ref: mergeRefs([ref, container, measureRef as any])
-        }}
+        {...{ ref: mergeRefs([ref, container, measureRef as any]) }}
       >
         <StyledWrapper
-          {...{
-            ...props,
-            style: {
-              height: 'max-content'
-            }
-          }}
+          {...{ ...props, style: { height: 'max-content', ...props?.style } }}
         >
           <ShiftContext.Provider
             {...{
