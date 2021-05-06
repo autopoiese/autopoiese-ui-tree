@@ -4,22 +4,23 @@ import { v4 as uuid } from 'uuid'
 import { StyledItem } from './styled'
 import { ShiftContext } from './context'
 
-function usePrevious<T = any>(value: T): T | undefined {
-  const ref = React.useRef<T>()
-  React.useEffect(() => {
-    ref.current = value
-  })
-  return ref.current
-}
+// function usePrevious<T = any>(value: T): T | undefined {
+//   const ref = React.useRef<T>()
+//   React.useEffect(() => {
+//     ref.current = value
+//   })
+//   return ref.current
+// }
 
 type ItemProps = {
   column?: number
   className?: string
+  title?: string
   children?: React.ReactNode
 }
 
 export const Item = React.memo<ItemProps>(
-  ({ column = 1, className = '', children, ...props }) => {
+  ({ column = 1, className = '', children, title, ...props }) => {
     const ref = React.useRef<HTMLDivElement>()
     const id = React.useMemo(() => uuid(), [])
     const {
@@ -29,7 +30,7 @@ export const Item = React.memo<ItemProps>(
       height: containerHeight
     } = React.useContext(ShiftContext)
     const active = shift === id
-    const prevActive = usePrevious(active)
+    // const prevActive = usePrevious(active)
     const scrollIntoView = () => {
       /*
     const top = ref.current?.offsetTop;
@@ -65,17 +66,12 @@ export const Item = React.memo<ItemProps>(
         //const left = ref.current?.offsetLeft;
         //setScroll?.({ top: top + containerHeight, left });
         if (active) {
-          console.log(ref.current)
           scrollIntoView()
           immediate.current && setTimeout(() => scrollIntoView(), 0)
           immediate.current = false
         }
       }
     })
-
-    React.useEffect(() => {
-      //if (!!active) scrollIntoView();
-    }, [active])
     return (
       <>
         <StyledItem
@@ -91,12 +87,12 @@ export const Item = React.memo<ItemProps>(
             onClick: (e) => {
               e.preventDefault()
               e.stopPropagation()
-
               immediate.current = Math.random() > 0.5
               setShift?.(!active ? id : null)
               if (immediate.current) {
               }
-            }
+            },
+            title
           }}
         >
           {children}

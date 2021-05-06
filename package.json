@@ -1,11 +1,14 @@
 {
   "name": "@autopoiese/ui-tree",
   "version": "0.0.1",
-  "peerDependencies": {
+  "dependencies": {
     "@emotion/styled": "^11",
     "@react-spring/web": "^9",
     "react": "^17",
     "react-merge-refs": "^1",
     "uuid": "^8"
+  },
+  "devDependencies": {
+    "@types/react": "^17"
   }
 }

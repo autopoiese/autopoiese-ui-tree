@@ -25,23 +25,23 @@ export const StyledWrapper = styled(animated.section)`
   float: right;
 `
 
-export const StyledItem = styled(animated.div)`
+export const StyledItem = styled(animated.div)<{ title?: string }>`
   display: flex;
   min-height: 32px;
   flex-direction: inherit;
   box-sizing: border-box;
+  padding-left: 8px;
   & > & {
-    padding-left: 8px;
     margin-left: 24px;
   }
   counter-increment: item;
   scroll-snap-align: start;
   background-color: rgba(0, 0, 255, 0.1);
   &::before {
-    content: counter(item) " Header";
+    content: ${(props) => props.title || "counter(item) ' Item'"};
     height: 32px;
     min-height: 32px;
     display: flex;
     align-items: center;
   }
-`;
+`
