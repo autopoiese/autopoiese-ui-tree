@@ -3,6 +3,21 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true
   },
-  "exclude": ["../**/*.spec.ts" , "../**/*.spec.js", "../**/*.spec.tsx", "../**/*.spec.jsx"],
-  "include": ["../src/**/*"]
+  "exclude": [
+    "../**/*.spec.ts",
+    "../**/*.test.ts",
+    "../**/*.spec.js",
+    "../**/*.test.js",
+    "../**/*.spec.tsx",
+    "../**/*.test.tsx",
+    "../**/*.spec.jsx",
+    "../**/*.test.jsx",
+    "jest.config.ts"
+  ],
+  "include": ["../src/**/*"],
+  "files": [
+    "../../../../node_modules/@nrwl/react/typings/cssmodule.d.ts",
+    "../../../../node_modules/@nrwl/react/typings/image.d.ts",
+    "../../../../node_modules/@nrwl/react/typings/styled-jsx.d.ts"
+  ]
 }
